@@ -1,12 +1,29 @@
-# React + Vite
+# 💱 Currency Converter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and responsive currency converter built with React.  
+This project was created to explore **custom React hooks** and **reusable components**, providing a solid foundation for scaling UI logic in a clean and modular way.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Description
 
-## Expanding the ESLint configuration
+The Currency Converter allows users to convert between different currencies using real-time exchange rates.  
+It serves as a learning project focused on mastering:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Creating **custom hooks** to encapsulate logic
+- Building **reusable UI components**
+- Managing API requests and state efficiently in React
+
+Whether you're new to hooks or looking to better organize your React components, this project is designed to reinforce modern best practices.
+
+---
+
+## ✨ Features
+
+- 🔁 Real-time currency conversion.
+- 🌐 Dynamic selection of base and target currencies
+- 🔍 Reusable and styled dropdown components
+- ⚙️ Clean and scalable custom hook for fetching and calculating exchange rates
+- 📱 Responsive design for all screen sizes
+
+---
