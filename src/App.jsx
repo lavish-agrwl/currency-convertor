@@ -15,7 +15,7 @@ const App = () => {
   const [to, setTo] = useState("INR");
 
   // Fetch currency exchange rates data using custom hook
-  // const data = useCurrency();
+  const data = useCurrency();
 
   /**
    * Calculates the converted amount based on current exchange rates
