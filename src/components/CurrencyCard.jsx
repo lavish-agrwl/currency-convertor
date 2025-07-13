@@ -1,4 +1,176 @@
-const CurrencyCard= ({
+const currencyOptions = [
+  "AED",
+  "AFN",
+  "ALL",
+  "AMD",
+  "ANG",
+  "AOA",
+  "ARS",
+  "AUD",
+  "AWG",
+  "AZN",
+  "BAM",
+  "BBD",
+  "BDT",
+  "BGN",
+  "BHD",
+  "BIF",
+  "BMD",
+  "BND",
+  "BOB",
+  "BRL",
+  "BSD",
+  "BTC",
+  "BTN",
+  "BWP",
+  "BYN",
+  "BYR",
+  "BZD",
+  "CAD",
+  "CDF",
+  "CHF",
+  "CLF",
+  "CLP",
+  "CNY",
+  "COP",
+  "CRC",
+  "CUC",
+  "CUP",
+  "CVE",
+  "CZK",
+  "DJF",
+  "DKK",
+  "DOP",
+  "DZD",
+  "EEK",
+  "EGP",
+  "ERN",
+  "ETB",
+  "EUR",
+  "FJD",
+  "FKP",
+  "GBP",
+  "GEL",
+  "GGP",
+  "GHS",
+  "GIP",
+  "GMD",
+  "GNF",
+  "GTQ",
+  "GYD",
+  "HKD",
+  "HNL",
+  "HRK",
+  "HTG",
+  "HUF",
+  "IDR",
+  "ILS",
+  "IMP",
+  "INR",
+  "IQD",
+  "IRR",
+  "ISK",
+  "JEP",
+  "JMD",
+  "JOD",
+  "JPY",
+  "KES",
+  "KGS",
+  "KHR",
+  "KMF",
+  "KPW",
+  "KRW",
+  "KWD",
+  "KYD",
+  "KZT",
+  "LAK",
+  "LBP",
+  "LKR",
+  "LRD",
+  "LSL",
+  "LTL",
+  "LVL",
+  "LYD",
+  "MAD",
+  "MDL",
+  "MGA",
+  "MKD",
+  "MMK",
+  "MNT",
+  "MOP",
+  "MRO",
+  "MUR",
+  "MVR",
+  "MWK",
+  "MXN",
+  "MYR",
+  "MZN",
+  "NAD",
+  "NGN",
+  "NIO",
+  "NOK",
+  "NPR",
+  "NZD",
+  "OMR",
+  "PAB",
+  "PEN",
+  "PGK",
+  "PHP",
+  "PKR",
+  "PLN",
+  "PYG",
+  "QAR",
+  "RON",
+  "RSD",
+  "RUB",
+  "RWF",
+  "SAR",
+  "SBD",
+  "SCR",
+  "SDG",
+  "SEK",
+  "SGD",
+  "SHP",
+  "SLL",
+  "SOS",
+  "SRD",
+  "STD",
+  "SVC",
+  "SYP",
+  "SZL",
+  "THB",
+  "TJS",
+  "TMT",
+  "TND",
+  "TOP",
+  "TRY",
+  "TTD",
+  "TWD",
+  "TZS",
+  "UAH",
+  "UGX",
+  "USD",
+  "UYU",
+  "UZS",
+  "VEF",
+  "VND",
+  "VUV",
+  "WST",
+  "XAF",
+  "XAG",
+  "XAU",
+  "XCD",
+  "XDR",
+  "XOF",
+  "XPF",
+  "YER",
+  "ZAR",
+  "ZMK",
+  "ZMW",
+  "ZWL",
+];
+
+const CurrencyCard = ({
   label,
   onAmountChange,
   onCurrencyChange,
@@ -7,8 +179,7 @@ const CurrencyCard= ({
   isAmountDisabled = false,
   isCurrencyDisabled = false,
   className = "",
-  currencyOptions = []
-})=> {
+}) => {
   return (
     <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
       <div className="w-1/2">
@@ -18,26 +189,31 @@ const CurrencyCard= ({
           type="number"
           placeholder="Amount"
           value={amount}
-          onChange={(e) => { onAmountChange && onAmountChange(Number(e.target.value)); }}
+          onChange={(e) => {
+            onAmountChange && onAmountChange(Number(e.target.value));
+          }}
           disabled={isAmountDisabled}
         />
       </div>
       <div className="w-1/2 flex flex-wrap justify-end text-right">
         <p className="text-black/40 mb-2 w-full">Currency Type</p>
-        <select className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
+        <select
+          className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
           value={selectCurrency}
-          onChange={(e) => { onCurrencyChange && onCurrencyChange(e.target.value) }}
-          disabled = {isCurrencyDisabled}
+          onChange={(e) => {
+            onCurrencyChange && onCurrencyChange(e.target.value);
+          }}
+          disabled={isCurrencyDisabled}
         >
-          {currencyOptions.map((cur) => {
-            <option value= {cur} key = {cur} >
+          {currencyOptions.map((cur) => (
+            <option value={cur} key={cur}>
               {cur}
             </option>
-           })}
+          ))}
         </select>
       </div>
     </div>
   );
-}
+};
 
 export default CurrencyCard;

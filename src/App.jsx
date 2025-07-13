@@ -3,30 +3,31 @@ import CurrencyCard from "./components/CurrencyCard";
 import useCurrency from "./hooks/useCurrency";
 
 const App = () => {
-  let [amount, setAmount] = useState();
-  let [convertedAmount, setConvertedAmount] = useState();
-  let [from, setFrom] = useState("usd");
-  let [to, setTo] = useState("inr");
+  let [amount, setAmount] = useState(0);
+  let [convertedAmount, setConvertedAmount] = useState(0);
+  let [from, setFrom] = useState("USD");
+  let [to, setTo] = useState("INR");
 
-  const data = useCurrency(from);
-  const currencyOptions = Object.keys(data);
+  const data = useCurrency();
 
   function calculateConvertedAmount() {
-    setConvertedAmount = amount * data[to];
+    if (data && data.quotes) {
+      const fromRate = data.quotes[`USD${from}`] || 1;
+      const toRate = data.quotes[`USD${to}`] || 1;
+      const result = (amount / fromRate) * toRate;
+      setConvertedAmount(result);
+    }
   }
 
   function swap() {
-    setFrom = to;
-    setTo = from;
-    setAmount = convertedAmount;
-    setConvertedAmount = amount;
+    setFrom(to);
+    setTo(from);
+    setAmount(convertedAmount);
+    setConvertedAmount(amount);
   }
 
   return (
-    <div
-      className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
-
-    >
+    <div className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat">
       <div className="w-full">
         <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
           <form
@@ -48,7 +49,6 @@ const App = () => {
                 isAmountDisabled={false}
                 isCurrencyDisabled={false}
                 className=""
-                currencyOptions={currencyOptions}
               />
             </div>
             <div className="relative w-full h-0.5">
@@ -71,12 +71,12 @@ const App = () => {
                 isAmountDisabled={true}
                 isCurrencyDisabled={false}
                 className=""
-                currencyOptions={currencyOptions}
               />
             </div>
             <button
               type="submit"
               className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg"
+              onClick={calculateConvertedAmount}
             >
               Convert
             </button>

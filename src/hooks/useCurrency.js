@@ -1,20 +1,47 @@
 import { useEffect, useState } from "react";
 
-function useCurrency(currency) {
+const CACHE_KEY = "currency_exchange_rates";
+
+function useCurrency() {
   const [data, setData] = useState({});
-  useEffect(() => {
-    let url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/${currency}.json`;
+
+  const fetchCurrencyData = async () => {
+    // Check if data exists in sessionStorage
+    const cachedData = sessionStorage.getItem(CACHE_KEY);
+    if (cachedData) {
+      try {
+        const parsedData = JSON.parse(cachedData);
+        setData(parsedData);
+        console.log("Using cached currency data");
+        return;
+      } catch (error) {
+        console.error("Error parsing cached data:", error);
+        // If cached data is invalid, remove it and fetch fresh data
+        sessionStorage.removeItem(CACHE_KEY);
+      }
+    }
+
+    // Fetch fresh data if no valid cache exists
+    let url = `https://api.exchangerate.host/live?access_key=${
+      import.meta.env.VITE_CURRENCY_API_KEY
+    }`;
     try {
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          // Process the currency data
-          setData(data[currency]);
-        });
+      console.log("Fetching fresh currency data from API");
+      const response = await fetch(url);
+      const result = await response.json();
+
+      // Store in sessionStorage for future use
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify(result));
+      setData(result);
     } catch (error) {
       console.error("Error fetching currency data:", error);
     }
-  }, [currency]);
+  };
+
+  useEffect(() => {
+    fetchCurrencyData();
+  }, []);
+
   return data;
 }
 export default useCurrency;
