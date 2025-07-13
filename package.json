@@ -1,5 +1,6 @@
 {
   "name": "currency-convertor",
+  "description": "A modern React-based currency converter application with real-time exchange rates",
   "private": true,
   "version": "0.0.0",
   "type": "module",
