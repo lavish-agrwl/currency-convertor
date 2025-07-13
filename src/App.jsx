@@ -15,7 +15,7 @@ const App = () => {
   const [to, setTo] = useState("INR");
 
   // Fetch currency exchange rates data using custom hook
-  const data = useCurrency();
+  // const data = useCurrency();
 
   /**
    * Calculates the converted amount based on current exchange rates
@@ -90,7 +90,7 @@ const App = () => {
                 className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5 hover:bg-blue-700 transition-colors"
                 onClick={swap}
               >
-                swap
+                Swap
               </button>
             </div>
 
