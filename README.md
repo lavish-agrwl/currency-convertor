@@ -77,27 +77,47 @@ Whether you're new to hooks or looking to better organize your React components,
 ## 🏗️ Project Structure
 
 ```
-src/
-├── components/
-│   └── CurrencyCard.jsx      # Reusable currency input/output component
-├── hooks/
-│   └── useCurrency.js        # Custom hook for API calls and caching
-├── assets/
-│   └── backgroundImage.png   # Background image for the app
-├── App.jsx                   # Main application component
-├── main.jsx                  # React app entry point
-└── index.css                 # Global styles (Tailwind CSS)
+currency-convertor/
+├── public/
+│   └── vite.svg
+├── src/
+│   ├── assets/
+│   │   └── backgroundImage.png
+│   ├── components/
+│   │   ├── CurrencyCard.jsx         # Reusable currency input/output component with search & dark mode
+│   │   ├── currencyOptions.js       # Centralized currency code list
+│   │   └── themeSwitcher.jsx        # Theme switcher button (light/dark)
+│   ├── context/
+│   │   └── useThemeContext.jsx      # Theme context provider and hook
+│   ├── hooks/
+│   │   └── useCurrency.js           # Custom hook for API calls and session caching
+│   ├── App.jsx                      # Main application component
+│   ├── main.jsx                     # React app entry point
+│   └── index.css                    # Global styles (Tailwind CSS)
+├── .env                             # Environment variables (API key)
+├── index.html                       # Main HTML file
+├── package.json                     # Project metadata and dependencies
+├── tailwind.config.js               # Tailwind CSS configuration
+└── README.md                        # Project documentation
 ```
 
 ---
 
-## 🔧 Technologies Used
+## 🔧 Technical Details
 
-- **React 19** - UI library with hooks
-- **Vite** - Fast build tool and dev server
-- **Tailwind CSS** - Utility-first CSS framework
-- **exchangerate.host API** - Real-time currency exchange rates
-- **Session Storage** - Browser caching for API responses
+- **React 19**: Modern UI library with hooks and context API
+- **Vite**: Fast build tool and dev server for React projects
+- **Tailwind CSS**: Utility-first CSS framework with dark mode support
+- **Custom Theme Context**: React context for toggling dark/light mode, updates `<html>` class
+- **Custom Hooks**: `useCurrency` for API data and session caching, `useThemeContext` for theme state
+- **Searchable Dropdown**: Currency selection uses a custom searchable dropdown (not native `<select>`)
+- **Session Storage**: Caches API results for the session to minimize requests
+- **Environment Variables**: API key managed securely via `.env` and Vite's `VITE_` prefix
+- **Responsive Design**: Mobile-friendly layout and controls
+- **Accessibility**: Keyboard and screen reader friendly components
+- **ESLint**: Code linting for best practices
+- **Swap Functionality**: Instantly swap base and target currencies and values
+- **Backdrop Blur & Theming**: Modern UI with blur effects and theme-aware colors
 
 ---
 
@@ -144,3 +164,38 @@ This project is open source and available under the [MIT License](LICENSE).
 **Lavish Agarwal** - [@lavish-agrwl](https://github.com/lavish-agrwl)
 
 Project Link: [https://github.com/lavish-agrwl/currency-convertor](https://github.com/lavish-agrwl/currency-convertor)
+
+---
+
+## 🌗 Dark Mode Support
+
+This project supports dark mode using Tailwind CSS's `dark:` classes and a custom theme switcher.
+
+### How it works
+
+- The theme switcher toggles the `dark` class on the `<html>` element using React context.
+- Tailwind is configured with `darkMode: 'class'` in `tailwind.config.js`.
+- Components use `dark:` prefixed classes for backgrounds, text, borders, and hover states.
+
+### Example usage
+
+```jsx
+// In your context provider (see src/context/useThemeContext.jsx)
+useEffect(() => {
+  const h = document.documentElement;
+  if (theme === "dark") {
+    h.classList.add("dark");
+  } else {
+    h.classList.remove("dark");
+  }
+}, [theme]);
+```
+
+### Troubleshooting
+
+- If colors do not change, ensure you have a `tailwind.config.js` file with `darkMode: 'class'`.
+- Restart your dev server after creating or editing the config file.
+- Make sure your components use `dark:` classes (e.g., `dark:bg-gray-900`, `dark:text-white`).
+- Do not add a `light` class to `<html>`; light mode is the default when `dark` is not present.
+
+---
