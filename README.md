@@ -85,8 +85,9 @@ currency-convertor/
 │   │   └── backgroundImage.png
 │   ├── components/
 │   │   ├── CurrencyCard.jsx         # Reusable currency input/output component with search & dark mode
-│   │   ├── currencyOptions.js       # Centralized currency code list
 │   │   └── themeSwitcher.jsx        # Theme switcher button (light/dark)
+│   ├── constants/
+│   │   └── currencyOptions.js       # Centralized currency code list
 │   ├── context/
 │   │   └── useThemeContext.jsx      # Theme context provider and hook
 │   ├── hooks/

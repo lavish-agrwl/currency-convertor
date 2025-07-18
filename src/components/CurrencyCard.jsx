@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { currencyOptions } from "./currencyOptions";
+import { currencyOptions } from "../constants/currencyOptions";
 
 /**
  * CurrencyCard Component
