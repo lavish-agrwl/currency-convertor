@@ -1,7 +1,9 @@
 import { useState } from "react";
 import CurrencyCard from "./components/CurrencyCard";
+import ThemeSwitcher from "./components/ThemeSwitcher";   
 import useCurrency from "./hooks/useCurrency";
 import backgroundImage from "./assets/backgroundImage.png";
+import { ThemeContextProvider } from "./context/useThemeContext";
 
 /**
  * Main App component for the Currency Converter application
@@ -45,17 +47,22 @@ const App = () => {
   }
 
   return (
+    <ThemeContextProvider>
     <div
-      className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat bg-center"
+      className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat bg-center dark:bg-gray-950"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
+      {/* Theme Switcher Button */}
+      <div className="absolute top-4 right-4">
+        <ThemeSwitcher />
+      </div>
       <div className="w-full">
         {/* Main converter container with backdrop blur and semi-transparent background */}
-        <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
+        <div className="w-full max-w-md mx-auto border border-gray-60 dark:border-gray-700 rounded-lg p-5 backdrop-blur-sm bg-white/30 dark:bg-black/60">
           {/* App title */}
-          <h1 className="text-center text-2xl font-bold mb-4 text-gray-800">
+          <h1 className="text-center text-2xl font-bold mb-4 text-gray-800 dark:text-gray-300">
             Currency Converter
           </h1>
 
@@ -87,7 +94,7 @@ const App = () => {
             <div className="relative w-full h-0.5">
               <button
                 type="button"
-                className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5 hover:bg-blue-700 transition-colors"
+                className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white dark:border-gray-700 rounded-md bg-indigo-500 text-white px-2 py-0.5 hover:bg-indigo-600 dark:hover:bg-indigo-800 transition-colors"
                 onClick={swap}
               >
                 Swap
@@ -112,7 +119,7 @@ const App = () => {
             {/* Convert Button */}
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+              className="w-full bg-indigo-500 text-white px-4 py-3 rounded-lg hover:bg-indigo-600 dark:hover:bg-indigo-800 transition-colors font-semibold"
               onClick={calculateConvertedAmount}
             >
               Convert
@@ -121,6 +128,7 @@ const App = () => {
         </div>
       </div>
     </div>
+    </ThemeContextProvider>
   );
 };
 
